@@ -30,6 +30,15 @@ export function Header() {
           <span className="text-xl">💰</span>
           <span>FinLit</span>
         </Link>
+
+        <div className="ml-auto flex items-center gap-2">
+          <Button variant="ghost" size="icon" aria-label="Toggle theme">
+            <span className="h-5 w-5">🌙</span>
+          </Button>
+          <Button variant="outline" size="sm">
+            Sign in
+          </Button>
+        </div>
       </div>
     </header>
   );
