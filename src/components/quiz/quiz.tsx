@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { markLessonCompleted } from "@/lib/progress";
 import type { QuizQuestion } from "@/lib/data/stocks";
 
 interface QuizProps {
   questions: QuizQuestion[];
+  trackId: string;
+  lessonId: string;
   onComplete?: (score: number, total: number) => void;
 }
 
-export function Quiz({ questions, onComplete }: QuizProps) {
+export function Quiz({ questions, trackId, lessonId, onComplete }: QuizProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showFeedback, setShowFeedback] = useState(false);
@@ -36,8 +39,10 @@ export function Quiz({ questions, onComplete }: QuizProps) {
 
   const handleNext = () => {
     if (isLastQuestion) {
+      const finalScore = score + (isCorrect ? 1 : 0);
+      markLessonCompleted(trackId, lessonId, finalScore, questions.length);
       setCompleted(true);
-      onComplete?.(score + (isCorrect ? 1 : 0), questions.length);
+      onComplete?.(finalScore, questions.length);
     } else {
       setCurrentIndex((prev) => prev + 1);
       setSelectedAnswer(null);

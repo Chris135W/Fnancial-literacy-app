@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getLessonById } from "@/lib/data/stocks";
+import { getCreditCardLessonById } from "@/lib/data/credit-cards";
 import { Button } from "@/components/ui/button";
 import { LessonTracker } from "@/components/lesson/lesson-tracker";
 
@@ -8,9 +8,9 @@ interface LessonPageProps {
   params: Promise<{ lessonId: string }>;
 }
 
-export default async function LessonPage({ params }: LessonPageProps) {
+export default async function CreditCardsLessonPage({ params }: LessonPageProps) {
   const { lessonId } = await params;
-  const lesson = getLessonById(lessonId);
+  const lesson = getCreditCardLessonById(lessonId);
 
   if (!lesson) {
     notFound();
@@ -18,13 +18,13 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   return (
     <div className="space-y-8">
-      <LessonTracker trackId="stocks" lessonId={lessonId} />
+      <LessonTracker trackId="credit-cards" lessonId={lessonId} />
       <div className="space-y-2">
         <Link
-          href="/stocks"
+          href="/credit-cards"
           className="text-sm text-muted-foreground hover:underline"
         >
-          ← Back to Stocks
+          ← Back to Credit Cards
         </Link>
         <h1 className="text-3xl font-bold tracking-tight">{lesson.title}</h1>
         <p className="text-muted-foreground">{lesson.description}</p>
@@ -43,7 +43,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
           <div className="pt-4">
             <Button asChild size="lg">
-              <Link href={`/stocks/${lessonId}/quiz`}>Take Quiz</Link>
+              <Link href={`/credit-cards/${lessonId}/quiz`}>Take Quiz</Link>
             </Button>
           </div>
         </div>

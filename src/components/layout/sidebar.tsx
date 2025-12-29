@@ -33,6 +33,17 @@ export function Sidebar() {
         </Link>
       </div>
       <nav className="flex-1 space-y-6 p-4">
+        <Link
+          href="/dashboard"
+          className={cn(
+            "flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+            pathname === "/dashboard"
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+          )}
+        >
+          Dashboard
+        </Link>
         {navSections.map((section) => (
           <div key={section.title} className="space-y-1">
             <h3 className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
